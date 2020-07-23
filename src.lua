@@ -43,15 +43,19 @@ function resetHealth()
 	health=maxhealth
 end
 
-function saveData()
-	file=io.open("Skins\\MyPlant\\data.txt","w")
-	file:write(name.."\n"..age.."\n"..health)
-	file:close()
+function water()
+	if health==maxhealth then updateHealth() -- decrease health if watering watered plant (doesn't work because after decrease of health an immidiate click will raise health)
+	else resetHealth() -- reset health if watering unwatered plant
+	end
 end
+
+function trash()
+
+end
+
 
 function loadData()
 	file=io.open("Skins\\MyPlant\\data.txt","r")
-
 	if file==nil then
 		err="No file found"
 		file.close()
@@ -63,6 +67,17 @@ function loadData()
 	health=file:read()
 	file:close()
 	end
+end
+
+function saveData()
+	file:write(name.."\n"..age.."\n"..health)
+	file:close()
+end
+
+function deleteData()
+	file:close()
+	file=os.remove("Skins\\MyPlant\\data.txt","w")
+	Initialize()
 end
 
 function Initialize()
